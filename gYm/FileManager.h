@@ -16,6 +16,7 @@ public:
 	static map<string, queue<string>>waitingLists;
 	static map<string, long long>accounts;
 	static void loadAccounts();
+	static void saveAccounts();
 	static bool matchingNameAndId(string name, long long id);
 	static json loadUserToObject(long long id);
 	static bool fileExist(string fileName);

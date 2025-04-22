@@ -11,6 +11,8 @@ int main()
 	while (it != FileManager::accounts.end())
 	{
 		cout << it->first << " " << it->second << "\n";
+		it = next(it);
 	}
+	FileManager::saveAccounts();
 	return 0;
 }

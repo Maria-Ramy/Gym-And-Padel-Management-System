@@ -29,6 +29,20 @@ void FileManager::loadAccounts()
 	}
 }
 
+void FileManager::saveAccounts()
+{
+	json Accounts;
+	ofstream file("Accounts.json");
+	auto it = accounts.begin();
+	while (it != accounts.end())
+	{
+		Accounts[it->first] = it->second;
+		it = next(it);
+	}
+	file << Accounts;
+	file.close();
+}
+
 bool FileManager::matchingNameAndId(string name, long long id)
 {
 	// Check If User Exists First
