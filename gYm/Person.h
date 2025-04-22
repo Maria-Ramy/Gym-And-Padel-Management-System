@@ -20,5 +20,4 @@ public:
 	void setDay(int Day);
 	void setMonth(int Month);
 	void setYear(int Year);
-	void ok();
 };
