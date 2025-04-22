@@ -12,10 +12,12 @@ class FileManager
 public:
 	FileManager();
 	// List Of Waiting Lists
+	// Class To Queue Of Waiting Lists
 	static map<string, queue<string>>waitingLists;
-	static bool loadWaiting();
-	static bool matchingNameAndId(string name, int id);
-	static json loadUserToObject(int id);
+	static map<string, long long>accounts;
+	static void loadAccounts();
+	static bool matchingNameAndId(string name, long long id);
+	static json loadUserToObject(long long id);
 	static bool fileExist(string fileName);
 	static void loadUserToFile(string fileName, json obj);
 	static void createFile(string name);

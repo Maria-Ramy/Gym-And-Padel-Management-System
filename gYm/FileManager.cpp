@@ -3,36 +3,41 @@
 // ifstream -> read
 // ofstream -> write
 
-bool FileManager::loadWaiting()
+map<string, queue<string>> FileManager::waitingLists;
+map<string, long long> FileManager::accounts;
+
+FileManager::FileManager()
 {
-	
 }
 
-bool FileManager::matchingNameAndId(string name, int id)
+// Call To Load All Accounts In Map Of Accounts
+void FileManager::loadAccounts()
 {
-	json accounts;
+	json Accounts;
 	// Open Accounts File
 	ifstream file("Accounts.json");
 	// Load To Accounts
-	file >> accounts;
+	file >> Accounts;
 	file.close();
 
-	// Check If User Exists First
-	if (!accounts.contains(name))
-		return false;
-
 	// User Exists, Look For Matching ID
-	auto it = accounts.begin();
-	while (it != accounts.end())
+	auto it = Accounts.begin();
+	while (it != Accounts.end())
 	{
-		if (accounts[name] == id)
-			return true;
+		accounts[it.key()] = it.value();
 		it = next(it);
 	}
-	return false;
 }
 
-json FileManager::loadUserToObject(int id)
+bool FileManager::matchingNameAndId(string name, long long id)
+{
+	// Check If User Exists First
+	if (accounts.find(name) == accounts.end())
+		return false;
+	return accounts[name] == id ? true : false;
+}
+
+json FileManager::loadUserToObject(long long id)
 {
 	// If Matching Then File Must Exist
 	json myFile;
