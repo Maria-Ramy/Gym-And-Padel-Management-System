@@ -11,13 +11,15 @@ class FileManager
 {
 public:
 	FileManager();
-	// List Of Waiting Lists
-	// Class To Queue Of Waiting Lists
+
 	static map<string, queue<string>>waitingLists;
-	static map<string, long long>accounts;
+	static map<long long, string>accounts;
+
 	static void loadAccounts();
 	static void saveAccounts();
+
 	static bool matchingNameAndId(string name, long long id);
+
 	static json loadUserToObject(long long id);
 	static bool fileExist(string fileName);
 	static void loadUserToFile(string fileName, json obj);

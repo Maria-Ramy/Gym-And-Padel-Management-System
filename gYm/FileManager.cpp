@@ -4,7 +4,7 @@
 // ofstream -> write
 
 map<string, queue<string>> FileManager::waitingLists;
-map<string, long long> FileManager::accounts;
+map<long long, string> FileManager::accounts;
 
 FileManager::FileManager()
 {
@@ -24,7 +24,7 @@ void FileManager::loadAccounts()
 	auto it = Accounts.begin();
 	while (it != Accounts.end())
 	{
-		accounts[it.key()] = it.value();
+		accounts[it.value()] = it.key();
 		it = next(it);
 	}
 }
@@ -36,7 +36,7 @@ void FileManager::saveAccounts()
 	auto it = accounts.begin();
 	while (it != accounts.end())
 	{
-		Accounts[it->first] = it->second;
+		Accounts[it->second] = it->first;
 		it = next(it);
 	}
 	file << Accounts;
@@ -46,9 +46,9 @@ void FileManager::saveAccounts()
 bool FileManager::matchingNameAndId(string name, long long id)
 {
 	// Check If User Exists First
-	if (accounts.find(name) == accounts.end())
+	if (accounts.find(id) == accounts.end())
 		return false;
-	return accounts[name] == id ? true : false;
+	return accounts[id] == name ? true : false;
 }
 
 json FileManager::loadUserToObject(long long id)
