@@ -131,6 +131,7 @@
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="PlansData.h" />
     <ClInclude Include="Subscription.h" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="PlansData.cpp" />
     <ClCompile Include="Subscription.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

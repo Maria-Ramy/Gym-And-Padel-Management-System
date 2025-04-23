@@ -1,5 +1,7 @@
 #pragma once
 #include<iostream>
+#include"PlansData.h"
+#include"FileManager.h"
 using namespace std;
 
 // Basic, Standard, Premium, Ultimate 
@@ -17,4 +19,9 @@ public:
 	string getName();
 	int getPrice();
 	int getDuration();
+	
+	void extendPlan(string planName);
+	void cancelPlan();
+	void changePlan(string newPlan);
+	void newPlan(string planName, string userName);
 };

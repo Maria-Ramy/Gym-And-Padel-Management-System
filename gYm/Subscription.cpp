@@ -37,3 +37,29 @@ int Subscription::getDuration()
 {
 	return duration;
 }
+
+void Subscription::extendPlan(string planName)
+{
+	duration += PlansData::getDuration(planName);
+}
+
+void Subscription::cancelPlan()
+{
+	duration = 0;
+}
+
+void Subscription::changePlan(string newPlan)
+{
+	// If Sub Ends Only
+	duration = PlansData::getDuration(newPlan);
+	name = newPlan;
+}
+
+void Subscription::newPlan(string planName, string userName)
+{
+	changePlan(planName);
+	auto lastUser = FileManager::accounts.rbegin();
+	long long newId = lastUser->first + 1;
+	// userName to map
+	FileManager::accounts[newId] = userName;
+}

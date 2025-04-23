@@ -3,7 +3,7 @@
 
 class Person
 {
-private:
+protected:
 	string fName, mName, lName;
 	Date dateOfBirth;
 public:
