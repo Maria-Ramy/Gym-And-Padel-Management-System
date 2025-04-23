@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-// Basic, Standard, Premium, 
+// Basic, Standard, Premium, Ultimate 
 class Subscription
 {
 private:
