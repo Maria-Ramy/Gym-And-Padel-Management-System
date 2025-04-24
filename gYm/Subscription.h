@@ -23,5 +23,5 @@ public:
 	void extendPlan(string planName);
 	void cancelPlan();
 	void changePlan(string newPlan);
-	void newPlan(string planName, string userName);
+    void newPlan(string planName, string userName);
 };

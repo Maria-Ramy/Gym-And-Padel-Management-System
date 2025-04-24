@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<queue>
+#include<stack>
 #include<fstream>
 #include"json.hpp"
 using json = nlohmann::json;
@@ -11,12 +12,14 @@ class FileManager
 {
 public:
 	FileManager();
-
-	static map<string, queue<string>>waitingLists;
+	static unordered_map<string, queue<string>>waitingLists;
 	static map<long long, string>accounts;
 
 	static void loadAccounts();
 	static void saveAccounts();
+
+	static void loadWaitLists();
+	static void saveWaitLists();
 
 	static bool matchingNameAndId(string name, long long id);
 

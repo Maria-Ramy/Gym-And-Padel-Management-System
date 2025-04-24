@@ -43,6 +43,44 @@ void FileManager::saveAccounts()
 	file.close();
 }
 
+void FileManager::loadWaitLists()
+{
+	json waitingListsJson;
+	// Open WaitLists File
+	ifstream file("WaitLists.json");
+	// Load To WaitListsJson
+	file >> waitingListsJson;
+	file.close();
+
+	auto it = waitingListsJson.begin();
+	while (it != waitingListsJson.end())
+	{
+		string className = *it;
+		for (string name : waitingListsJson[className])
+			waitingLists[className].push(name);
+		it++;
+	}
+}
+
+void FileManager::saveWaitLists()
+{
+	json waitingListsJson;
+	ofstream file("WaitLists.json");
+	auto it = waitingLists.begin();
+	while (it != waitingLists.end())
+	{
+		queue<string>currentClass = it->second;
+		while (currentClass.size())
+		{
+			waitingListsJson[it->first].push_back(currentClass.front());
+			currentClass.pop();	
+		}
+		it++;
+	}
+	file << waitingListsJson;
+	file.close();
+}
+
 bool FileManager::matchingNameAndId(string name, long long id)
 {
 	// Check If User Exists First
