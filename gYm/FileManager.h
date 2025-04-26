@@ -5,6 +5,7 @@
 #include<fstream>
 #include"ClassInfo.h"
 #include"json.hpp"
+#include"Member.h"
 using json = nlohmann::json;
 using namespace std;
 
@@ -14,7 +15,7 @@ class FileManager
 public:
 	FileManager();
 	static unordered_map<string, queue<string>>waitingLists;
-	static map<long long, string>accounts;
+	static unordered_map<string, Member>accounts;
 	static unordered_map<string, ClassInfo>classes;
 
 	// Working
@@ -31,7 +32,7 @@ public:
 
 
 
-	static bool matchingNameAndId(string name, long long id);
+	static bool matchingNameAndId(string name, string id);
 
 	static json loadUserToObject(long long id);
 	static bool fileExist(string fileName);

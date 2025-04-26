@@ -4,17 +4,17 @@ Person::Person()
 {
 }
 
-string Person::getFname()
+string Person::getFname() const
 {
 	return fName;
 }
 
-string Person::getMname()
+string Person::getMname() const
 {
 	return mName;
 }
 
-string Person::getLname()
+string Person::getLname() const
 {
 	return lName;
 }
@@ -34,17 +34,17 @@ void Person::setLname(string Lname)
 	lName = Lname;
 }
 
-int Person::getDay()
+int Person::getDay() const
 {
 	return dateOfBirth.getDay();
 }
 
-int Person::getMonth()
+int Person::getMonth() const
 {
 	return dateOfBirth.getMonth();
 }
 
-int Person::getYear()
+int Person::getYear() const
 {
 	return dateOfBirth.getYear();
 }

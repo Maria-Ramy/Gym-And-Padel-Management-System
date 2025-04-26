@@ -10,9 +10,9 @@ private:
 public:
 	Date();
 	Date(int d, int m, int y);
-	int getDay();
-	int getMonth();
-	int getYear();
+	int getDay() const;
+	int getMonth() const;
+	int getYear() const;
 	void setDay(int Day);
 	void setMonth(int Month);
 	void setYear(int Year);

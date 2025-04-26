@@ -2,23 +2,39 @@
 using namespace std;
 Member::Member() : plan(), ID(0) {}
 
-Member::Member(const Subscription& Plan, int id) : plan(Plan), ID(id) {}
+Member::Member(string name1, string name2, string name3, int dd, int mm, int yy, long long id, string planName, int dur)
+{
+    fName = name1;
+    mName = name2;
+    lName = name3;
+    dateOfBirth.setDay(dd);
+    dateOfBirth.setMonth(mm);
+    dateOfBirth.setYear(yy);
+    ID = id;
+    plan.setName(planName);
+    plan.setDurtion(dur);
+}
 
 // Setters
 void Member::setID(int id) {
     ID = id;
 }
-void Member::setPlan(const Subscription& Plan) {
-    plan = Plan;
-}
+
 
 // Getters
-int Member::getID() const {
+long long Member::getID() const {
     return ID;
 }
-Subscription Member::getPlan() const {
-    return plan;
+string Member::getPlanName() const
+{
+    return plan.getName();
 }
+
+int Member::getPlanDuration() const
+{
+    return plan.getDuration();
+}
+
 
 // Membership functions
 
@@ -33,8 +49,4 @@ void Member::cancel() {
 
 void Member::change(string newPlan) {
      plan.changePlan(newPlan);
-}
-
-void Member::getMembership(string planName) {
-    plan.newPlan(planName, fName + " " + mName + " " + lName);
 }

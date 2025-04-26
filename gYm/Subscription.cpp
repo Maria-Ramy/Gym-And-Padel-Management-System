@@ -23,17 +23,17 @@ void Subscription::setDurtion(int Duration)
 	duration = Duration;
 }
 
-string Subscription::getName()
+string Subscription::getName() const
 {
 	return name;
 }
 
-int Subscription::getPrice()
+int Subscription::getPrice() const
 {
 	return price;
 }
 
-int Subscription::getDuration()
+int Subscription::getDuration() const
 {
 	return duration;
 }
@@ -53,13 +53,4 @@ void Subscription::changePlan(string newPlan)
 	// If Sub Ends Only
 	duration = PlansData::getDuration(newPlan);
 	name = newPlan;
-}
-
-void Subscription::newPlan(string planName, string userName)
-{
-	changePlan(planName);
-	auto lastUser = FileManager::accounts.rbegin();
-	long long newId = lastUser->first + 1;
-	// userName to map
-	FileManager::accounts[newId] = userName;
 }

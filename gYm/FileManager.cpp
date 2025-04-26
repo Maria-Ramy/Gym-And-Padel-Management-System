@@ -4,14 +4,30 @@
 // ofstream -> write
 
 unordered_map<string, queue<string>> FileManager::waitingLists;
-map<long long, string> FileManager::accounts;
 unordered_map<string, ClassInfo> FileManager::classes;
+// Need Sorting Based On Id;
+unordered_map<string, Member> FileManager::accounts;
 
 FileManager::FileManager()
 {
 }
 
-// Call To Load All Accounts In Map Of Accounts
+void from_json(const json& j, Member& u) {
+	u = Member{
+		j.at("First Name").get<string>(),
+		j.at("Middle Name").get<string>(),
+		j.at("Last Name").get<string>(),
+		j.at("Day").get<int>(),
+		j.at("Month").get<int>(),
+		j.at("Year").get<int>(),
+		j.at("ID").get<long long>(),
+		j.at("Plan Name").get<string>(),
+		j.at("Duration").get<int>()
+	};
+}
+
+
+
 void FileManager::loadAccounts()
 {
 	json Accounts;
@@ -25,10 +41,27 @@ void FileManager::loadAccounts()
 	auto it = Accounts.begin();
 	while (it != Accounts.end())
 	{
-		accounts[it.value()] = it.key();
+		accounts[it.key()] = it.value();
 		it++;
 	}
 }
+
+void to_json(json& j, const Member& u)
+{
+	j = json
+	{
+		{"First Name", u.getFname()},
+		{"Middle Name", u.getMname()},
+		{"Last Name", u.getLname()},
+		{"Day", u.getDay()},
+		{"Month", u.getMonth()},
+		{"Year", u.getYear()},
+		{"ID", u.getID()},
+		{"Plan Name", u.getPlanName()},
+		{"Duration", u.getPlanDuration()},
+	};
+}
+
 
 void FileManager::saveAccounts()
 {
@@ -36,11 +69,12 @@ void FileManager::saveAccounts()
 	auto it = accounts.begin();
 	while (it != accounts.end())
 	{
-		Accounts[it->second] = it->first;
+		Accounts[it->first] = it->second;
 		it++;
+
 	}
 	ofstream file("Accounts.json");
-	file << Accounts;
+	file << Accounts.dump(4);
 	file.close();
 }
 
@@ -55,6 +89,7 @@ void to_json(json& j, const ClassInfo& u)
 		{"Capacity", u.getClassCapacity()}
 	};
 }
+
 
 void from_json(const json& j, ClassInfo& u) {
 	u = ClassInfo{
@@ -140,12 +175,13 @@ void FileManager::saveWaitLists()
 }
 
 
-bool FileManager::matchingNameAndId(string name, long long id)
+bool FileManager::matchingNameAndId(string name, string id)
 {
 	// Check If User Exists First
 	if (accounts.find(id) == accounts.end())
 		return false;
-	return accounts[id] == name ? true : false;
+	string fullName = accounts[id].getFname() + " " + accounts[id].getMname() + " " + accounts[id].getLname();
+	return fullName == name? true : false;
 }
 
 json FileManager::loadUserToObject(long long id)
