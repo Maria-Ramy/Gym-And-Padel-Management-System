@@ -3,8 +3,9 @@
 // ifstream -> read
 // ofstream -> write
 
-map<string, queue<string>> FileManager::waitingLists;
+unordered_map<string, queue<string>> FileManager::waitingLists;
 map<long long, string> FileManager::accounts;
+unordered_map<string, ClassInfo> FileManager::classes;
 
 FileManager::FileManager()
 {
@@ -25,29 +26,83 @@ void FileManager::loadAccounts()
 	while (it != Accounts.end())
 	{
 		accounts[it.value()] = it.key();
-		it = next(it);
+		it++;
 	}
 }
 
 void FileManager::saveAccounts()
 {
 	json Accounts;
-	ofstream file("Accounts.json");
 	auto it = accounts.begin();
 	while (it != accounts.end())
 	{
 		Accounts[it->second] = it->first;
-		it = next(it);
+		it++;
 	}
+	ofstream file("Accounts.json");
 	file << Accounts;
 	file.close();
 }
+
+
+void to_json(json& j, const ClassInfo& u)
+{
+	j = json
+	{
+		{"Name", u.getClassName()},
+		{"Day", u.getClassDay()},
+		{"Time", u.getClassTime()},
+		{"Capacity", u.getClassCapacity()}
+	};
+}
+
+void from_json(const json& j, ClassInfo& u) {
+	u = ClassInfo{
+		j.at("Name").get<string>(),
+		j.at("Day").get<string>(),
+		j.at("Time").get<string>(),
+		j.at("Capacity").get<int>()
+	};
+}
+
+
+void FileManager::loadClasses()
+{
+	ifstream file("Classes.json");
+	json Classes;
+	file >> Classes;
+	auto it = Classes.begin();
+	while (it != Classes.end())
+	{
+		classes[it.key()] = it.value();
+		it++;
+	}
+}
+
+void FileManager::saveClasses()
+{
+	ofstream file("Classes.json");
+	json Classes;
+	auto it = classes.begin();
+	while (it != classes.end())
+	{
+		string className = it->first;
+		Classes[className] = it->second;
+		it++;
+	}
+	file << Classes.dump(4);
+	file.close();
+}
+
+
+
 
 void FileManager::loadWaitLists()
 {
 	json waitingListsJson;
 	// Open WaitLists File
 	ifstream file("WaitLists.json");
+
 	// Load To WaitListsJson
 	file >> waitingListsJson;
 	file.close();
@@ -55,8 +110,8 @@ void FileManager::loadWaitLists()
 	auto it = waitingListsJson.begin();
 	while (it != waitingListsJson.end())
 	{
-		string className = *it;
-		for (string name : waitingListsJson[className])
+		string className = it.key();
+		for (string name : it.value())
 			waitingLists[className].push(name);
 		it++;
 	}
@@ -65,21 +120,25 @@ void FileManager::loadWaitLists()
 void FileManager::saveWaitLists()
 {
 	json waitingListsJson;
-	ofstream file("WaitLists.json");
+	
 	auto it = waitingLists.begin();
 	while (it != waitingLists.end())
 	{
 		queue<string>currentClass = it->second;
+		string className = it->first;
 		while (currentClass.size())
 		{
-			waitingListsJson[it->first].push_back(currentClass.front());
+			waitingListsJson[className].push_back(currentClass.front());
 			currentClass.pop();	
 		}
 		it++;
 	}
+	// Write In File
+	ofstream file("WaitLists.json");
 	file << waitingListsJson;
 	file.close();
 }
+
 
 bool FileManager::matchingNameAndId(string name, long long id)
 {

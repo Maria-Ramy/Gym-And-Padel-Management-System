@@ -1,0 +1,26 @@
+{
+    "Fady": {
+        "Capacity": 0,
+        "Day": "Wednesday",
+        "Name": "Pilates",
+        "Time": "10 AM"
+    },
+    "Jowanna": {
+        "Capacity": 0,
+        "Day": "Friday",
+        "Name": "Dance",
+        "Time": "6 PM"
+    },
+    "Maria": {
+        "Capacity": 0,
+        "Day": "Monday",
+        "Name": "Yoga",
+        "Time": "7 PM"
+    },
+    "Youssef": {
+        "Capacity": 0,
+        "Day": "Friday",
+        "Name": "Cardio",
+        "Time": "8 PM"
+    }
+}

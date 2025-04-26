@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClassInfo.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="Member.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Subscription.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClasssInfo.cpp" />
     <ClCompile Include="cpp.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="FileManager.cpp" />
