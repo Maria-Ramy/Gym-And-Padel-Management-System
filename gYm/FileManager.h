@@ -14,7 +14,7 @@ class FileManager
 {
 public:
 	FileManager();
-	static unordered_map<string, queue<string>>waitingLists;
+	static unordered_map<string, queue<Member>>waitingLists;
 	static unordered_map<string, Member>accounts;
 	static unordered_map<string, ClassInfo>classes;
 
@@ -26,7 +26,7 @@ public:
 	static void loadClasses();
 	static void saveClasses();
 
-	// Needs Debugging
+	// Working
 	static void loadWaitLists();
 	static void saveWaitLists();
 

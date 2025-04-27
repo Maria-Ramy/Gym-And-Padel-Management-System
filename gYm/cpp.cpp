@@ -14,10 +14,11 @@ int main()
 {
 	FileManager::loadAccounts();
     FileManager::loadClasses();
-	//FileManager::loadWaitLists();
+	FileManager::loadWaitLists();
+	
 	
 
-	//FileManager::saveWaitLists();
+	FileManager::saveWaitLists();
 	FileManager::saveAccounts();
 	FileManager::saveClasses();
 

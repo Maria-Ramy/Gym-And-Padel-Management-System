@@ -3,7 +3,10 @@
 // ifstream -> read
 // ofstream -> write
 
-unordered_map<string, queue<string>> FileManager::waitingLists;
+// From Json Uses Class Constructor
+
+
+unordered_map<string, queue<Member>> FileManager::waitingLists;
 unordered_map<string, ClassInfo> FileManager::classes;
 unordered_map<string, Member> FileManager::accounts;
 
@@ -12,7 +15,8 @@ FileManager::FileManager()
 }
 
 void from_json(const json& j, Member& u) {
-	u = Member{
+	u = Member
+	{
 		j.at("First Name").get<string>(),
 		j.at("Middle Name").get<string>(),
 		j.at("Last Name").get<string>(),
@@ -91,7 +95,8 @@ void to_json(json& j, const ClassInfo& u)
 
 
 void from_json(const json& j, ClassInfo& u) {
-	u = ClassInfo{
+	u = ClassInfo
+	{
 		j.at("Name").get<string>(),
 		j.at("Day").get<string>(),
 		j.at("Time").get<string>(),
@@ -130,7 +135,6 @@ void FileManager::saveClasses()
 
 
 
-
 void FileManager::loadWaitLists()
 {
 	json waitingListsJson;
@@ -145,8 +149,8 @@ void FileManager::loadWaitLists()
 	while (it != waitingListsJson.end())
 	{
 		string className = it.key();
-		for (string name : it.value())
-			waitingLists[className].push(name);
+		for (Member member : it.value())
+			waitingLists[className].push(member);
 		it++;
 	}
 }
@@ -158,7 +162,7 @@ void FileManager::saveWaitLists()
 	auto it = waitingLists.begin();
 	while (it != waitingLists.end())
 	{
-		queue<string>currentClass = it->second;
+		queue<Member>currentClass = it->second;
 		string className = it->first;
 		while (currentClass.size())
 		{
@@ -169,7 +173,7 @@ void FileManager::saveWaitLists()
 	}
 	// Write In File
 	ofstream file("WaitLists.json");
-	file << waitingListsJson;
+	file << waitingListsJson.dump(4);
 	file.close();
 }
 
