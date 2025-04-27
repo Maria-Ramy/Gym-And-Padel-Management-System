@@ -174,6 +174,18 @@ void FileManager::saveWaitLists()
 	file.close();
 }
 
+long long FileManager::getLastId()
+{
+	auto it = accounts.begin();
+	long long mx = -1;
+	while (it != accounts.end())
+	{
+		mx = max(mx, stoll(it->first));
+		it++;
+	}
+	return mx;
+}
+
 
 bool FileManager::matchingNameAndId(string name, string id)
 {

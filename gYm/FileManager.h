@@ -30,10 +30,12 @@ public:
 	static void loadWaitLists();
 	static void saveWaitLists();
 
-
-
+	// Utilities
+	static long long getLastId();
 	static bool matchingNameAndId(string name, string id);
 
+
+	// Wait
 	static json loadUserToObject(long long id);
 	static bool fileExist(string fileName);
 	static void loadUserToFile(string fileName, json obj);
