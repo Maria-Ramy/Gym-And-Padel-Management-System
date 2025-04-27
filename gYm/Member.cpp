@@ -2,6 +2,7 @@
 using namespace std;
 Member::Member() : plan(), ID(0) {}
 
+
 Member::Member(string name1, string name2, string name3, int dd, int mm, int yy, long long id, string planName, int dur)
 {
     fName = name1;
@@ -15,13 +16,11 @@ Member::Member(string name1, string name2, string name3, int dd, int mm, int yy,
     plan.setDurtion(dur);
 }
 
-// Setters
 void Member::setID(int id) {
     ID = id;
 }
 
 
-// Getters
 long long Member::getID() const {
     return ID;
 }

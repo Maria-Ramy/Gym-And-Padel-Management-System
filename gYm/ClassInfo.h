@@ -5,7 +5,7 @@ using namespace std;
 class ClassInfo
 {
 private:
-	string className, day, time;
+	string className, classDay, classTime;
 	int capacity;
 public:
 	ClassInfo();

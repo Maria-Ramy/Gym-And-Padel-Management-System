@@ -15,6 +15,8 @@ int main()
 	FileManager::loadAccounts();
     FileManager::loadClasses();
 	//FileManager::loadWaitLists();
+	
+
 
 
 	//FileManager::saveWaitLists();

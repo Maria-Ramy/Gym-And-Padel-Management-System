@@ -7,8 +7,8 @@ ClassInfo::ClassInfo()
 ClassInfo::ClassInfo(string ClassName, string ClassDay, string ClassTime, int ClassCapacity)
 {
 	className = ClassName;
-	day = ClassDay;
-	time = ClassTime;
+	classDay = ClassDay;
+	classTime = ClassTime;
 	capacity = ClassCapacity;
 }
 
@@ -19,12 +19,12 @@ void ClassInfo::setClassName(string ClassName)
 
 void ClassInfo::setClassTime(string ClassTime)
 {
-	time = ClassTime;
+	classTime = ClassTime;
 }
 
 void ClassInfo::setClassDay(string ClassDay)
 {
-	day = ClassDay;
+	classDay = ClassDay;
 }
 
 void ClassInfo::setClassCapacity(int Capacity)
@@ -39,12 +39,12 @@ string ClassInfo::getClassName() const
 
 string ClassInfo::getClassTime() const
 {
-	return time;
+	return classTime;
 }
 
 string ClassInfo::getClassDay() const
 {
-	return day;
+	return classDay;
 }
 
 int ClassInfo::getClassCapacity() const
@@ -55,7 +55,7 @@ int ClassInfo::getClassCapacity() const
 void ClassInfo::display()
 {
 	cout << className << "\n";
-	cout << time << "\n";
-	cout << day << "\n";
+	cout << classTime << "\n";
+	cout << classDay << "\n";
 	cout << capacity << "\n";
 }
