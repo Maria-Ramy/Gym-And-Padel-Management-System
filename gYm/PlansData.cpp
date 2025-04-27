@@ -3,13 +3,14 @@
 int PlansData::getDuration(string planName)
 {
 	if (planName == "Basic")
-		return 1;
+		return 30;
 	if (planName == "Standard")
-		return 3;
+		return 90;
 	if (planName == "Premium")
-		return 6;
+		return 180;
 	if (planName == "Ultimte")
-		return 12;
+		return 360;
+	return 0;
 }
 
 int PlansData::getPrice(string planName)
@@ -22,4 +23,5 @@ int PlansData::getPrice(string planName)
 		return 600;
 	if (planName == "Ultimte")
 		return 1000;
+	return 0;
 }

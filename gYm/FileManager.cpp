@@ -5,7 +5,6 @@
 
 unordered_map<string, queue<string>> FileManager::waitingLists;
 unordered_map<string, ClassInfo> FileManager::classes;
-// Need Sorting Based On Id;
 unordered_map<string, Member> FileManager::accounts;
 
 FileManager::FileManager()
