@@ -20,9 +20,18 @@ void Member::setID(int id) {
     ID = id;
 }
 
+void Member::addWorkout(string workout)
+{
+    pastWorkouts.push_back(workout);
+}
+
 
 long long Member::getID() const {
     return ID;
+}
+vector<string> Member::getPastWorkouts() const
+{
+    return pastWorkouts;
 }
 string Member::getPlanName() const
 {

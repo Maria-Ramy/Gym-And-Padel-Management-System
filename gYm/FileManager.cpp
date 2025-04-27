@@ -5,7 +5,6 @@
 
 // From Json Uses Class Constructor
 
-
 unordered_map<string, queue<Member>> FileManager::waitingLists;
 unordered_map<string, ClassInfo> FileManager::classes;
 unordered_map<string, Member> FileManager::accounts;
@@ -25,7 +24,7 @@ void from_json(const json& j, Member& u) {
 		j.at("Year").get<int>(),
 		j.at("ID").get<long long>(),
 		j.at("Plan Name").get<string>(),
-		j.at("Duration").get<int>()
+		j.at("Duration").get<int>(),
 	};
 }
 
@@ -86,9 +85,9 @@ void to_json(json& j, const ClassInfo& u)
 {
 	j = json
 	{
-		{"Name", u.getClassName()},
 		{"Day", u.getClassDay()},
 		{"Time", u.getClassTime()},
+		{"Coach", u.getCoachName()},
 		{"Capacity", u.getClassCapacity()}
 	};
 }
@@ -97,9 +96,9 @@ void to_json(json& j, const ClassInfo& u)
 void from_json(const json& j, ClassInfo& u) {
 	u = ClassInfo
 	{
-		j.at("Name").get<string>(),
 		j.at("Day").get<string>(),
 		j.at("Time").get<string>(),
+		j.at("Coach").get<string>(),
 		j.at("Capacity").get<int>()
 	};
 }
