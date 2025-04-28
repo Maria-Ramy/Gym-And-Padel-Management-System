@@ -157,7 +157,7 @@ void FileManager::loadWaitLists()
 void FileManager::saveWaitLists()
 {
 	json waitingListsJson;
-	
+
 	auto it = waitingLists.begin();
 	while (it != waitingLists.end())
 	{
@@ -166,7 +166,7 @@ void FileManager::saveWaitLists()
 		while (currentClass.size())
 		{
 			waitingListsJson[className].push_back(currentClass.front());
-			currentClass.pop();	
+			currentClass.pop();
 		}
 		it++;
 	}
@@ -195,7 +195,7 @@ bool FileManager::matchingNameAndId(string name, string id)
 	if (accounts.find(id) == accounts.end())
 		return false;
 	string fullName = accounts[id].getFname() + " " + accounts[id].getMname() + " " + accounts[id].getLname();
-	return fullName == name? true : false;
+	return fullName == name ? true : false;
 }
 
 json FileManager::loadUserToObject(long long id)
@@ -219,7 +219,7 @@ void FileManager::loadUserToFile(string fileName, json obj)
 	// Create If Dosen't Exist
 	if (!fileExist(fileName))
 		createFile(fileName);
-	
+
 	// Load Object To File
 	ofstream file(fileName + ".json");
 	file << obj;
@@ -253,3 +253,44 @@ void FileManager::addToWaiting(string className, string fName, string mName, str
 	writeWaiting << waitingList;
 	writeWaiting.close();
 }
+
+void FileManager::addMember(const Member& member, string className)
+{
+	if (classes[className].getClassCapacity() >= 10)
+	{
+		waitingLists[className].push(member);
+		cout << "Class is full. Member added to waiting list for " << className << endl;
+	}
+	else
+	{
+		classes[className].setClassCapacity(classes[className].getClassCapacity() + 1);
+		cout << "Member successfully added to class " << className << endl;
+	}
+}
+
+void FileManager::removeMemberFromClass(string className)
+{
+	if (classes[className].getClassCapacity() > 0)
+	{
+		classes[className].setClassCapacity(classes[className].getClassCapacity() - 1);
+
+		if (!waitingLists[className].empty())
+		{
+			Member firstInQueue = waitingLists[className].front();
+			waitingLists[className].pop();
+
+			classes[className].setClassCapacity(classes[className].getClassCapacity() + 1);
+
+			cout << "A member from the waiting list has been added to the class: " << className << endl;
+		}
+		else
+		{
+			cout << "No members in waiting list for class: " << className << endl;
+		}
+	}
+	else
+	{
+		cout << "No members currently enrolled in class: " << className << endl;
+	}
+}
+
