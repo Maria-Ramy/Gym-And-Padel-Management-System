@@ -41,4 +41,7 @@ public:
 	static void loadUserToFile(string fileName, json obj);
 	static void createFile(string name);
 	static void addToWaiting(string className, string fName, string mName, string lName);
+	static void addMember(const Member& member, string className);
+	static void removeMemberFromClass(string className);
+
 };
